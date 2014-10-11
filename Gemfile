@@ -14,6 +14,8 @@ gem 'rails', '4.0.10'
    gem 'sqlite3'
  end
 
+ gem 'bootstrap-sass', '~> 3.1.1'
+ 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
