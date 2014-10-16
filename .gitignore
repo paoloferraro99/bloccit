@@ -15,7 +15,7 @@
 /log/*.log
 /tmp
 
-# Ignore application configuration.
+# Ignore application configuration. Ignore secret token configuration.
+/secret_token.rb
 /config/application.yml
-# Ignore secret_token configuration.
-/config/initializers/secret_token.rb
+
