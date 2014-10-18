@@ -1,11 +1,20 @@
 Bloccit::Application.routes.draw do
+  
   devise_for :users
   #We'll remove those in favor of a more succinct way of creating Post routes. We'll simply call the resources method, and pass it a symbol. By doing this you instruct Rails to create routes for every CRUD action:
   #get "posts/index"
   #get "posts/show"
   #get "posts/new"
   #get "posts/edit"
-  resources :posts
+  # get "topics/index"
+  # get "topics/new"
+  # get "topics/show"
+  # get "topics/edit"
+  # resources :posts
+  # resources :topics
+  resources :topics do
+    resources :posts, except: [:index]
+  end
   #get "welcome/index"
   #get "welcome/about"
   get 'about' => 'welcome#about'
