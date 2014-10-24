@@ -4,3 +4,10 @@ YOURMAIL_USERNAME:
 DEVISE_SECRET_KEY:
 
 SECRET_KEY_BASE:
+
+AWS_ACCESS_KEY_ID: your credential here
+AWS_SECRET_ACCESS_KEY: your credential here
+development:
+  AWS_BUCKET: your credential here
+production:
+  AWS_BUCKET: your credential here
