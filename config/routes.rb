@@ -1,5 +1,6 @@
 Bloccit::Application.routes.draw do
   
+  get "comments/create"
   devise_for :users
   resources :users, only: [:update]
   #We'll remove those in favor of a more succinct way of creating Post routes. We'll simply call the resources method, and pass it a symbol. By doing this you instruct Rails to create routes for every CRUD action:
@@ -14,7 +15,9 @@ Bloccit::Application.routes.draw do
   # resources :posts
   # resources :topics
   resources :topics do
-    resources :posts, except: [:index]
+    resources :posts, except: [:index] do
+		resources :comments, only: [:create]
+	end
   end
   #get "welcome/index"
   #get "welcome/about"
