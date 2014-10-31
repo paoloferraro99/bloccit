@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 describe Post do
+	
+	include TestFactories
+	
 	describe "vote methods" do
 		
 		before do
-			@post = Post.create(title: 'post title', body: 'post body has to be longer in order to be valid')
+			@post = associated_post
 			3.times { @post.votes.create(value: 1) }
 			2.times { @post.votes.create(value: -1) }
 		end
@@ -24,9 +27,20 @@ describe Post do
 		describe '#points' do
 			it "returns the sum of all down and up votes" do
 				expect( @post.points ).to eq(1)
-			end
+			end	
 		end
 	end
+		
+	describe '#create_vote' do
+		it "generates an up-vote when explicitly called" do
+			post = associated_post
+			expect( post.up_votes ).to eq(0)
+			post.create_vote
+			expect( post.up_votes ).to eq(1)
+		end
+	end
+		
 end
+
 
 		
