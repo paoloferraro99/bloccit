@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe Vote do
   describe "validations" do
     describe "value validation" do
@@ -9,7 +11,7 @@ describe Vote do
 		expect( v2.valid? ).to eq(true)
 
 		v3 = Vote.new(value: 2)
-		expect( v3.valid? ).to eq(true)
+		expect( v3.valid? ).to eq(false)
       end
     end
   end
