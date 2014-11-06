@@ -1,8 +1,12 @@
 class CommentsController < ApplicationController
+	
+	respond_to :html, :js
+	
 	def create
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.new(comment_params)
 		@comment.user_id = current_user.id
+		
 		if @comment.save
 			redirect_to [@post.topic, @post], notice: "Comment saved successfully."
 		else
@@ -18,10 +22,12 @@ class CommentsController < ApplicationController
 		
 		if @comment.destroy
 			flash[:notice] = "Comment was deleted."
-			redirect_to [@post.topic, @post]
 		else
 			flash[:error] = "Error deleting comment. Try again."
-			redirect_to [@post.topic, @post]
+		end
+		
+		respond_with(@comment) do |format|
+			format.html { redirect_to [@post.topic, @post] }
 		end
 	end
 	
