@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe "Visiting profiles" do
 	
-	include TestFactories
 	include Warden::Test::Helpers
 	Warden.test_mode!
 	
@@ -12,11 +11,11 @@ describe "Visiting profiles" do
 		# @comment = Comment.new(user: @user, body: "A Comment")
 		# allow(@comment).to receive(:send_favorite_emails)
 		# @comment.save
-		@user = authenticated_user
+		@user = create(:user)
 		@topic = Topic.create(description: "A topic")
-		@post = associated_post(user: @user, topic: @topic)
-		@comment = comment_without_email(post: @post, user: @user)
-	end
+		@post = create(:post, user: @user, topic: @topic)
+		@comment = create(:comment, post: @post, user: @user)
+		end
 	
 	describe "not signed in" do
 		
@@ -35,7 +34,7 @@ describe "Visiting profiles" do
 	
 	describe "signed in" do
 		
-		before { login_as authenticated_user(role: 'admin'), scope: :user }
+		before { login_as create(:user, role: 'admin'), scope: :user }
 		
 		it "shows profile" do
 			visit user_path(@user)
